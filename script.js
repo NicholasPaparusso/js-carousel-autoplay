@@ -52,11 +52,11 @@ itemThumb[0].classList.add('active');
 const up = document.querySelector('.up');
 const down = document.querySelector('.down');
 down.addEventListener('click', function() {
- changeDown();
+ changePhoto(true);
 })
 
 up.addEventListener('click', function() {
-  changeUp();
+  changePhoto(false);
 })
 
 // Aggiunta delle timing function 
@@ -65,7 +65,7 @@ let isPaused = false;
 
 let slide = setInterval(function(){
   if(!isPaused){
-    changeDown();
+    changePhoto(true);
     console.log(counter);
   }
 }, 2000)
@@ -85,28 +85,19 @@ slider.addEventListener('mouseout', function(){
 })
 
 
-
-
-//
-function changeUp(){
+function changePhoto(isNext){
   itemSlider[counter].classList.remove('active');
   itemThumb[counter].classList.remove('active');
-  counter--;
-  if(counter < 0){counter = images.length -1;}
+  if(isNext){
+    counter++;
+    if(counter === images.length){counter=0;}
+  }else{
+    counter--;
+    if(counter < 0){counter = images.length -1;}
+  }
   itemSlider[counter].classList.add('active');
   itemThumb[counter].classList.add('active');
 }
-
-function changeDown(){
-  itemSlider[counter].classList.remove('active');
-  itemThumb[counter].classList.remove('active');
-  counter++;
-  if(counter === images.length){counter=0;}
-  itemSlider[counter].classList.add('active');
-  itemThumb[counter].classList.add('active');
-}
-
-
 
 
 
